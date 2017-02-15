@@ -6,15 +6,13 @@
 </head>
 <body>
 This form will automate the tenant creation.  Please insert information below.
-<form action="http://www.onebox.com" method="post">
+<form action="http://ec2-52-14-125-190.us-east-2.compute.amazonaws.com/jenkins/" method="post">
 <h1> Enter Requiements</h1>
        <p>
        Name of Tenant Space: <input type="text" name="tenant"><br>
        Tenant Admin Username: <input type="text" name="adminuser"><br>
-       Tenant User Username: <input type="text" name="tenantuser"><br>
-       metadata items:<input type="text" name="metadata"><br>
        vCPUs: <input type="text" name="vcpu"><br>
-       instances:<input type="text" name="instances"><br>
+       instances:<input type="text" name="instances" value="10"><br>
        RAM: <input type="text" name="ram"><br>
        storage: <input type="text" name="storage"><br>
        <p>
