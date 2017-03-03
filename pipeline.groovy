@@ -49,6 +49,6 @@ stage('Create Tenant') {
     milestone()
     node {
         echo "Creating the tenant"
-        def response = httpRequest customHeaders: [[X-Auth-Token: json.token.user.id]], httpMode: 'GET', url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
+        def response = httpRequest customHeaders: [['X-Auth-Token': json.token.user.id]], httpMode: 'GET', url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
     }
 }
