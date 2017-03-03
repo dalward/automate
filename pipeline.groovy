@@ -17,22 +17,21 @@ stage('Receive Tenant Input') {
         echo ram
         echo "Accepting tenant values"
 
-   // def body = [
-     //   auth: [
-     //       identity: [
-     //           methods: "password",
-     //                    password: [
-     //                      user: [
-     //                        name: "admin",
-     //                        domain: [ id: "default" ],
-     //                        password: "secret"
-     //                      ]
-     //                    ]
-     //                   ]
-     //       ]
-     //   ]
+    def myCreds = """
+        { "auth":
+            {"identity": {"methods": ["password"],
+                          "password": {"user":
+                                      {"name": "admin",
+                                       "domain": { "id": "default" },
+                                       "password": "secret"
+                                      }
+                                      }
+                          }
+            }
+        }
+   """
     // def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body, url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
-        def response = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
+        def response = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: myCreds, url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
         echo "Now print Status"
         println('Status: '+response.status)
         echo "Now print Response"
