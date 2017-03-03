@@ -36,7 +36,7 @@ stage('Receive Tenant Input') {
         println('Status: '+response.status)
         echo "Now print Response"
         println('Response: '+response.content)
-        def json new groovy.Jsonsluper().parseText(+response.content)
+        def json = new groovy.json.JsonSlurper().parseText(response.content)
         println json.token.user.id
 
     }
