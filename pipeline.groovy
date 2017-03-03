@@ -42,7 +42,7 @@
             node {
                 println(myID)
                 echo "Creating the tenant"
-                def response = httpRequest customHeaders: [[name: 'X-Auth-Token', value: 'myID']], url: 'http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe', validResponseCodes: '100:202'
+                def response = httpRequest customHeaders: [[name: 'X-Auth-Token', value: myID]], url: 'http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe', validResponseCodes: '100:202'
                 println('Status: ' + response.status)
                 println('Response: ' + response.content)
 
