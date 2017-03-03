@@ -61,6 +61,6 @@ stage('Create Tenant') {
                       }
      }
 '''
-        def response = httpRequest contentType: 'APPLICATION_JSON', customHeaders: {"X-Auth-Token": json.token.user.id} httpMode: 'GET', requestBody: myCreds, url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
+        def response = httpRequest contentType: 'APPLICATION_JSON', customHeaders: [[X-Auth-Token: json.token.user.id]] httpMode: 'GET', requestBody: myCreds, url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
     }
 }
