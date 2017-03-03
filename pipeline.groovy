@@ -32,11 +32,11 @@ stage('Receive Tenant Input') {
      //       ]
      //   ]
     // def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body, url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
-        def myresponse = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
+//        def myresponse = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
         echo "Now print Status"
-        println('Status: '+myresponse.status)
+    //    println('Status: '+myresponse.status)
         echo "Now print Response"
-        println('Response: '+myresponse.content)
+      //  println('Response: '+myresponse.content)
 
 def latest_sha = shellCommandOutput("""
 curl -i   -H 'Content-Type: application/json'   -d '
