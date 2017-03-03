@@ -38,7 +38,7 @@
                 println('Response: ' + response.content)
                 def json = new groovy.json.JsonSlurper().parseText(response.content)
                 // myID = json.token.user.id
-                myID = json.token.id
+                myID = json.access.token.id
             }
         }
 
