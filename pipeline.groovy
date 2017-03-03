@@ -49,18 +49,7 @@ stage('Create Tenant') {
     milestone()
     node {
         echo "Creating the tenant"
-        def jsonText = '''
-            {"token": {"issued_at": "2017-02-16T20:38:59.000000Z",
-                   "audit_ids": ["4GL0zg0HRze7YsFcyOCu-w"],
-                   "methods": ["password"],
-                    "expires_at": "2017-02-16T21:38:59.000000Z",
-                    "user": {"password_expires_at": null,
-                                    "domain": {"id": "default",  "name": "Default"},
-                                    "id": "e4491ebc48044884bb16d8e03345b3af",
-                                    "name": "admin"}
-                      }
-     }
-'''
-        def response = httpRequest customHeaders: [['X-Auth-Token': json.token.user.id]], httpMode: 'GET', url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
+
+        def response = httpRequest customHeaders: [[X-Auth-Token: json.token.user.id]], httpMode: 'GET', url: "http://54.67.13.130:8774/v2.1/os-quota-sets/05dfdad50f004456b38ef26062e72cfe", validResponseCodes: '200'
     }
 }
