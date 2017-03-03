@@ -28,7 +28,7 @@
                 """
 // used v3/auth/tokens in URL string changed to /v2/tokens
 
-                def response = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: tenCreds, url: "http://54.67.13.130:5000/v2/tokens", validResponseCodes: '201'
+                def response = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: tenCreds, url: "http://54.67.13.130:5000/v2.0/tokens", validResponseCodes: '201'
                 echo "Now print Status"
                 println('Status: ' + response.status)
                 echo "Now print Response"
