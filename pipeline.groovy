@@ -37,7 +37,6 @@ stage('Receive Tenant Input') {
         println('Status: '+myresponse.status)
         echo "Now print Response"
         println('Response: '+myresponse.content)
-        println myresponse
 
 def latest_sha = shellCommandOutput("""
 curl -i   -H 'Content-Type: application/json'   -d '
