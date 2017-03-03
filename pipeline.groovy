@@ -36,27 +36,9 @@ stage('Receive Tenant Input') {
         println('Status: '+response.status)
         echo "Now print Response"
         println('Response: '+response.content)
+        def json new groovy.Jsonsluper().parseText(+response.content)
+        println json.token.user.id
 
-def latest_sha = shellCommandOutput("""
-curl -i   -H 'Content-Type: application/json'   -d '
-{ "auth": {
-    "identity": {
-      "methods": ["password"],
-      "password": {
-        "user": {
-          "name": "admin",
-          "domain": { "id": "default" },
-          "password": "secret"
- }
-      }
-    }
-  }
-}' http://54.67.13.130:5000/v3/auth/tokens ; echo
-"""
-        )
-
-
-//            sh "curl -i -H \"Content-Type: application/json\" -d \'payload=${payload}\' ${slackURL}"
     }
 }
 
