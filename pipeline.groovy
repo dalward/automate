@@ -24,15 +24,9 @@
                 """
 
                 def tenantCreds = """
-                    { "auth":
-                        {"passwordCredentials": {"username": "admin",
-                                                 "password": "secret"},
-                                                 "tenantName": "admin"
-                        }
-                    }
+                    {"auth":{"passwordCredentials":{"username":"admin", "password":"secret"}, "tenantName":"admin"}}
                 """
 
-      // -d '{"auth":{"passwordCredentials":{"username":"admin", "password":"secret"}, "tenantName":"admin"}}'
                 def response = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: tenantCreds, url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
                 echo "Now print Status"
                 println('Status: ' + response.status)
