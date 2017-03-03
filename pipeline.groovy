@@ -10,22 +10,36 @@ def shellCommandOutput(command) {
     return result
 }
 
-stage('Build') {
+stage('Receive Tenant Input') {
     // The first milestone step starts tracking concurrent build order
     milestone()
     node {
-        echo "Building"
-// Add whichever params you think you'd most want to have
-// replace the slackURL below with the hook url provided by
-// slack when you configure the webhook
-//        #! def notifySlack(text, channel) {
-//        def notifySlack() {
-//            def slackURL = 'http://54.67.13.130:5000/v3/auth/tokens'
-//             def payload = JsonOutput.toJson([auth      : text,
-//            channel   : channel,
-//                                             username  : "jenkins",
-//                                             icon_emoji: ":jenkins:"])
-        def latest_sha = shellCommandOutput("""
+        echo ram
+        echo "Accepting tenant values"
+
+   // def body = [
+     //   auth: [
+     //       identity: [
+     //           methods: "password",
+     //                    password: [
+     //                      user: [
+     //                        name: "admin",
+     //                        domain: [ id: "default" ],
+     //                        password: "secret"
+     //                      ]
+     //                    ]
+     //                   ]
+     //       ]
+     //   ]
+    // def response = httpRequest consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body, url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
+        def myresponse = httpRequest contentType: 'APPLICATION_JSON', httpMode: 'POST', url: "http://54.67.13.130:5000/v3/auth/tokens", validResponseCodes: '201'
+        echo "Now print Status"
+        println('Status: '+myresponse.status)
+        echo "Now print Response"
+        println('Response: '+myresponse.content)
+        println myresponse
+
+def latest_sha = shellCommandOutput("""
 curl -i   -H 'Content-Type: application/json'   -d '
 { "auth": {
     "identity": {
@@ -43,15 +57,30 @@ curl -i   -H 'Content-Type: application/json'   -d '
 """
         )
 
+
 //            sh "curl -i -H \"Content-Type: application/json\" -d \'payload=${payload}\' ${slackURL}"
     }
 }
 
 
-stage('Deploy') {
+stage('Create Tenant') {
     input "Deploy?"
     milestone()
     node {
-        echo "Deploying"
+        echo "Creating the tenant"
+        def jsonText = '''
+            {"token": {"issued_at": "2017-02-16T20:38:59.000000Z",
+                   "audit_ids": ["4GL0zg0HRze7YsFcyOCu-w"],
+                   "methods": ["password"],
+                    "expires_at": "2017-02-16T21:38:59.000000Z",
+                    "user": {"password_expires_at": null,
+                                    "domain": {"id": "default",  "name": "Default"},
+                                    "id": "e4491ebc48044884bb16d8e03345b3af",
+                                    "name": "admin"}
+                      }
+     }
+'''
+        def json = new groovy.json.JsonSlurper().parseText(jsonText)
+        println json.token.user.id
     }
 }
